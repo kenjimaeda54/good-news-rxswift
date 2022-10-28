@@ -25,39 +25,39 @@ class NewsTableViewController: UITableViewController {
 	func populatedNews() {
 		
 		// uma maneira de fazer
-//		let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&apiKey=e03da12b408445449464ceb16db4963a")!
-//
-//		Observable.just(url).flatMap { url -> Observable<Data> in
-//			let urlRequest = URLRequest(url: url)
-//			return URLSession.shared.rx.data(request: urlRequest)
-//			// data -> essa seta aponta para retorno eu desejo retornar um array
-//			//Articles por isso ao fazer decode eu coloco .articles
-//		}.map { data -> [Articles]? in
-//			return try? JSONDecoder().decode(ArticlesList.self, from: data).articles
-//		}.subscribe(onNext: {[weak self] articles in
-//
-//			if let articles = articles {
-//				self?.articles = articles
-//				DispatchQueue.main.async {
-//					self?.tableView.reloadData()
-//				}
-//
-//			}
-//
-//		}).disposed(by: disposed)
-		  
-		// outra usando extension
-		URLRequest.load(resource: ArticlesList.all)
-			.subscribe(onNext:{ results in
-				
-				if let results = results {
-					self.articles = results.articles
-					DispatchQueue.main.async {
-						self.tableView.reloadData()
-					}
+		//		let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&apiKey=e03da12b408445449464ceb16db4963a")!
+		//
+		//		Observable.just(url).flatMap { url -> Observable<Data> in
+		//			let urlRequest = URLRequest(url: url)
+		//			return URLSession.shared.rx.data(request: urlRequest)
+		//			// data -> essa seta aponta para retorno eu desejo retornar um array
+		//			//Articles por isso ao fazer decode eu coloco .articles
+		//		}.map { data -> [Articles]? in
+		//			return try? JSONDecoder().decode(ArticlesList.self, from: data).articles
+		//		}.subscribe(onNext: {[weak self] articles in
+		//
+		//			if let articles = articles {
+		//				self?.articles = articles
+		//				DispatchQueue.main.async {
+		//					self?.tableView.reloadData()
+		//				}
+		//
+		//			}
+		//
+		//		}).disposed(by: disposed)
 		
+		// segunda maneira usando extension
+		URLRequest.load(resource: ArticlesList.all).subscribe(onNext:{  [weak self ] results in
+			
+			if let articles = results?.articles {
+				self?.articles = articles
+
+				DispatchQueue.main.async {
+					self?.tableView.reloadData()
 				}
-			}).disposed(by: disposed)
+
+			}
+		}).disposed(by: disposed)
 		
 	}
 	
