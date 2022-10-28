@@ -1,9 +1,8 @@
 # Good News
-App com requisicao via internet da [News api](https://newsapi.org/)
+App com requisição via internet da [News api](https://newsapi.org/)
 
-
-# Objetivo
-Praticar conceitos relacionados a RxSwfit e operadores que transformam dados como map,flat map
+# Motivação
+Praticar conceitos relacionados a RxSwfit e operadores que transformam dados como map, flat map
 
 ## Feature
 - Para realizar requisição via internet o ideal utilizar o flatMap, com este operador retornamos um Observable
